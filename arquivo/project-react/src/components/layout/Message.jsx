@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react"
 
 function Message({ type = "info", msg }) {
-
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
-        if (msg) {
-            setVisible(true)
-
-            const timer = setTimeout(() => {
-                setVisible(false)
-            }, 3000)
-
-            return () => clearTimeout(timer)
+        // Se a mensagem for vazia ou nula, esconde o componente
+        if (!msg) {
+            setVisible(false)
+            return
         }
+
+        // Se houver mensagem, mostra e inicia o cronômetro
+        setVisible(true)
+
+        const timer = setTimeout(() => {
+            setVisible(false)
+        }, 5000) // 5 segundos é o tempo ideal para leitura
+
+        // Limpeza do timer caso o componente seja desmontado ou a msg mude
+        return () => clearTimeout(timer)
     }, [msg])
 
     if (!visible) return null
