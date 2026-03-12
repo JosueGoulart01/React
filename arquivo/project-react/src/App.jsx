@@ -8,6 +8,7 @@ import Container from './components/layout/Container'
 import NavBar from './components/layout/NavBar'
 import Footer from './components/layout/Footer'
 import NewProject from './components/pages/NewProject'
+import Project from './components/pages/Project'
 
 function App() {
   return (
@@ -17,10 +18,11 @@ function App() {
       <Container className="min-h-screen mt-10">
       <Routes className>
         <Route exact path='/' element={<Home/>}/>
-        <Route exact path='/company' element={<Company/>}/>
-        <Route exact path='/contact' element={<Contact/>}/>
-        <Route exact path='/Newproject' element={<NewProject/>}/>
-        <Route exact path='/projects' element={<Projects/>}/>
+        <Route path='/company' element={<Company/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/Newproject' element={<NewProject/>}/>
+        <Route path='/projects' element={<Projects/>}/>
+        <Route path='/project/:id' element={<Project/>}/>
       </Routes>
       </Container>
       <Footer/>

@@ -4,9 +4,9 @@ import Input from "../form/Input"
 import Select from "../form/Select"
 import SubmitButton from "../form/SubmitButton"
 
-function ProjectForm({ handleSubmit,btnText, prrojectData}) {
+function ProjectForm({ handleSubmit,btnText, projectData}) {
     const [categories, setCategories]= useState([])
-    const [project, setProjects] = useState(prrojectData ||
+    const [project, setProjects] = useState(projectData ||
         {
             name: '',
     budget: 0,

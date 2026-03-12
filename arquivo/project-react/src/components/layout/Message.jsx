@@ -1,27 +1,22 @@
+// Message.jsx
 import { useEffect, useState } from "react"
 
 function Message({ type = "info", msg }) {
-    const [visible, setVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
-        // Se a mensagem for vazia ou nula, esconde o componente
-        if (!msg) {
-            setVisible(false)
-            return
+        if (msg) {
+            setIsVisible(true)
+            
+            const timer = setTimeout(() => {
+                setIsVisible(false)
+            }, 4000) // 4 segundos
+            
+            return () => clearTimeout(timer)
         }
-
-        // Se houver mensagem, mostra e inicia o cronômetro
-        setVisible(true)
-
-        const timer = setTimeout(() => {
-            setVisible(false)
-        }, 5000) // 5 segundos é o tempo ideal para leitura
-
-        // Limpeza do timer caso o componente seja desmontado ou a msg mude
-        return () => clearTimeout(timer)
     }, [msg])
 
-    if (!visible) return null
+    if (!isVisible || !msg) return null
 
     const styles = {
         success: "bg-green-100 border-green-500 text-green-700",
@@ -31,7 +26,7 @@ function Message({ type = "info", msg }) {
     }
 
     return (
-        <div className={`w-full p-4 mb-8 border border-l-8 rounded-md shadow-sm ${styles[type]}`}>
+        <div className={`w-full p-4 mb-8 border-l-8 rounded-md shadow-sm ${styles[type]}`}>
             <p className="font-medium text-center">{msg}</p>
         </div>
     )

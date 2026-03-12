@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 import Message from "../layout/Message"
 import Container from '../layout/Container'
@@ -10,19 +10,17 @@ import ProjectCard from '../project/ProjectCard'
 function Projects() {
     const [projects, setProjects] = useState([])
     const [removeLoading, setRemoveLoading] = useState(false)
-    const [displayMessage, setDisplayMessage] = useState('')
+    const [message, setMessage] = useState('')
+    const [messageType, setMessageType] = useState('success')
 
     const location = useLocation()
-    // Usamos um Ref para garantir que processamos a mensagem da URL apenas uma vez
-    const messageProcessed = useRef(false)
 
     useEffect(() => {
-        // Se houver mensagem no state da navegação e ainda não processamos
-        if (location.state?.message && !messageProcessed.current) {
-            setDisplayMessage(location.state.message)
-            messageProcessed.current = true // Marca como lido
+        if (location.state?.message) {
+            setMessage(location.state.message)
+            setMessageType('success')
             
-            // Limpa o estado da navegação para não repetir ao dar F5
+            // Limpar o state da localização
             window.history.replaceState({}, document.title)
         }
     }, [location])
@@ -41,18 +39,20 @@ function Projects() {
     }, [])
 
     function removeProject(id) {
-        setDisplayMessage('') // Reseta para permitir que a nova mensagem apareça
-
         fetch(`http://localhost:5000/projects/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
-        .then(resp => resp.json())
         .then(() => {
             setProjects(projects.filter((project) => project.id !== id))
-            setDisplayMessage('Projeto removido com sucesso!')
+            setMessage('Projeto removido com sucesso!')
+            setMessageType('success')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            setMessage('Erro ao remover projeto!')
+            setMessageType('error')
+        })
     }
 
     return (
@@ -61,9 +61,8 @@ function Projects() {
                 <h1 className="text-4xl font-bold">Meus Projetos</h1>
                 <LinkButton to="/newProject" text="Criar Projeto" />
             </div>
-
-            {/* Renderização condicional direta para evitar conflitos */}
-            {displayMessage && <Message type="success" msg={displayMessage} />}
+            
+            {message && <Message type={messageType} msg={message} />}
 
             <Container>
                 {projects.length > 0 &&
@@ -79,7 +78,9 @@ function Projects() {
                     ))}
                 {!removeLoading && <Loading />}
                 {removeLoading && projects.length === 0 && (
-                    <p>Não há projetos cadastrados.</p>
+                    <p className="text-center text-gray-500 mt-8">
+                        Não há projetos cadastrados.
+                    </p>
                 )}
             </Container>
         </div>

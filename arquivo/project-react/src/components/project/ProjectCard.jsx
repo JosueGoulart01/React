@@ -27,7 +27,7 @@ function ProjectCard({ id, name, budget, category, handleRemove }) {
                 {category}
             </p>
             <div className='py-5 ml-3 grid grid-flow-col grid-rows-1 gap-2 text-2xl'>
-                <div><LinkButton text="Editar" /></div>
+                <div><LinkButton to={`/Project/${id}`} text="Editar" /></div>
                 <div><LinkButton onClick={(e) => {
                     if (window.confirm("Tem certeza que deseja excluir?")) {
                         remove(e);

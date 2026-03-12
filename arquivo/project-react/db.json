@@ -1,5 +1,47 @@
 {
-  "projects": [],
+  "projects": [
+    {
+      "id": "5627",
+      "name": "teste",
+      "budget": "231",
+      "category": {
+        "id": "3",
+        "name": "Desing"
+      },
+      "cost": 0,
+      "services": []
+    },
+    {
+      "id": "c98e",
+      "name": "galo",
+      "budget": "10",
+      "category": {
+        "id": "2",
+        "name": "Densenvolvimento"
+      },
+      "cost": null,
+      "services": [
+        {
+          "name": "galo22",
+          "cost": "2",
+          "description": "paia"
+        },
+        {
+          "cost": ""
+        },
+        {
+          "name": "teste43123",
+          "cost": "2000",
+          "description": "paia"
+        },
+        {
+          "name": "galo",
+          "cost": "2221",
+          "description": "paia"
+        }
+      ]
+    }
+  ],
   "categories": [
     {
       "id": "1",
