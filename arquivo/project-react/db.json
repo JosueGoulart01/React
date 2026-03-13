@@ -3,18 +3,24 @@
     {
       "id": "5627",
       "name": "teste",
-      "budget": "231",
+      "budget": "1000",
       "category": {
         "id": "3",
         "name": "Desing"
       },
-      "cost": 0,
-      "services": []
+      "cost": 200,
+      "services": [
+        {
+          "name": "adm",
+          "cost": "200",
+          "description": "paia"
+        }
+      ]
     },
     {
       "id": "c98e",
       "name": "galo",
-      "budget": "10",
+      "budget": "200",
       "category": {
         "id": "2",
         "name": "Densenvolvimento"
@@ -27,7 +33,9 @@
           "description": "paia"
         },
         {
-          "cost": ""
+          "name": "json",
+          "cost": "10",
+          "description": "paia"
         },
         {
           "name": "teste43123",
@@ -37,6 +45,11 @@
         {
           "name": "galo",
           "cost": "2221",
+          "description": "paia"
+        },
+        {
+          "name": "teste43123",
+          "cost": "1",
           "description": "paia"
         }
       ]
